@@ -1,6 +1,7 @@
 class Api::V1::PostsController < ApplicationController
   def index
 		# return all post
+		# include: 'comments' works with our serializer to the posts comments
 		render json: Post.all, include: 'comments'
   end
 

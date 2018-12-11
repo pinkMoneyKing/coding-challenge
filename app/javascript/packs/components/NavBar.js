@@ -1,5 +1,13 @@
 import React				from 'react';
 
+const NavBarClass = {
+	display: 'flex',
+	width: '100%',
+	border: '2px solid pink',
+	justifyContent: "space-between",
+	alignItems: "flex-end"
+}
+
 
 export default class NavBar extends React.Component {
 	constructor(props){
@@ -11,7 +19,7 @@ export default class NavBar extends React.Component {
 			setViewingState,
 		} = this.props;
 		return(
-			<div>
+			<div style={NavBarClass}>
 				<div
 					onClick={() => {
 						setViewingState('NEW_POST');
@@ -20,7 +28,7 @@ export default class NavBar extends React.Component {
 				</div>
 				<div
 					onClick={() => {
-						this.setViewingState('ALL_POSTS');
+						setViewingState('ALL_POSTS');
 						}}>
 							All Posts
 				</div>
