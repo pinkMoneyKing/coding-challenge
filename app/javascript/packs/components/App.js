@@ -1,36 +1,49 @@
 import React				from 'react';
-import {AllPosts}			from './AllPosts';
+import {AllPosts}		from './AllPosts';
+import NavBar				from './NavBar';
+import NewPost			from './NewPost';
 
-
-const viewing_state = {
-	LOADING: "LOADING",
-	ALL_POSTS: "ALL_POSTS",
-};
 export default class App extends React.Component{
 	constructor(props){
 		super(props);
 		this.state = {
-			view: viewing_state.LOADING,
+			view: 'LOADING',
 			posts: [],
 		}
+		// We bind this here so we can using it in other components
+		this.setViewingState = this.setViewingState.bind(this);
+		this.addNewPost = this.addNewPost.bind(this);
+	}
+	addNewPost(post){
+		this.setState({
+			posts: this.state.posts.concat(post)
+		})
+	}
+	setViewingState(view){
+		this.setState({view: view});
 	}
 	renderView(view){
 		switch(view){
-				case viewing_state.LOADING:
+				case 'LOADING':
 					return <div>Loading</div>;
-				case viewing_state.ALL_POSTS:
+				case 'ALL_POSTS':
 					return <AllPosts posts={this.state.posts} />
+				case 'NEW_POST':
+				return <NewPost 
+					setViewingState={this.setViewingState}
+					addNewPost={this.addNewPost}
+					/>;
 				default:
 					return <div>Error</div>;
-			}
 		}
+	}
 	componentDidMount(){
 		// Fetch all posts
 		fetch('/api/v1/posts.json')
 			.then((response) => { return response.json()})
 		.then((data) => {
 			this.setState({posts: data})
-			this.setState({view: viewing_state.ALL_POSTS})
+			this.setViewingState('ALL_POSTS');
 			});
 	}
 	render(){
@@ -38,6 +51,10 @@ export default class App extends React.Component{
 		const view = this.state.view
 		return(
 			<div>
+				<NavBar 
+					addNewPost={this.addNewPost}
+					setViewingState={this.setViewingState}
+					view={view} />
 				{this.renderView(view)}
 			</div>
 		);
