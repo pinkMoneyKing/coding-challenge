@@ -7,6 +7,8 @@ Rails.application.routes.draw do
 			end
 		end
 	end
+
+	# Not 100% sure why this is need but it is for comment creation
 	namespace :api do
 		namespace :v1 do
 			resources :comments 
