@@ -39,7 +39,8 @@ export default class App extends React.Component{
 	}
 	componentDidMount(){
 		// Fetch all posts
-		fetch('/api/v1/posts.json')
+		// fetch('/api/v1/posts.json')
+		fetch('/posts.json')
 			.then((response) => { return response.json()})
 		.then((data) => {
 			this.setState({posts: data})

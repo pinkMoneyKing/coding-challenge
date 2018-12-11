@@ -1,7 +1,7 @@
 class Api::V1::PostsController < ApplicationController
   def index
 		# return all post
-		render json: Post.all
+		render json: Post.all, include: 'comments'
   end
 
   def create
