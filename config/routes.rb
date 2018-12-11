@@ -7,4 +7,7 @@ Rails.application.routes.draw do
 			end
 		end
 	end
+
+	# Make root route our react app
+	root to: "react#index"
 end
