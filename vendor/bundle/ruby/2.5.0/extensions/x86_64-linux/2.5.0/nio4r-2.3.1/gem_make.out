@@ -1,0 +1,52 @@
+current directory: /home/pink/projects/coding-challenge/vendor/bundle/ruby/2.5.0/gems/nio4r-2.3.1/ext/nio4r
+/usr/bin/ruby -r ./siteconf20181211-31544-14ljvoa.rb extconf.rb --with-cflags=-std=c99
+checking for unistd.h... yes
+checking for sys/select.h... yes
+checking for port_event_t in poll.h... no
+checking for sys/epoll.h... yes
+checking for sys/event.h... no
+checking for port_event_t in port.h... no
+checking for sys/resource.h... yes
+creating Makefile
+
+current directory: /home/pink/projects/coding-challenge/vendor/bundle/ruby/2.5.0/gems/nio4r-2.3.1/ext/nio4r
+make "DESTDIR=" clean
+rm -f 
+rm -f nio4r_ext.so  *.o  *.bak mkmf.log .*.time
+
+current directory: /home/pink/projects/coding-challenge/vendor/bundle/ruby/2.5.0/gems/nio4r-2.3.1/ext/nio4r
+make "DESTDIR="
+gcc -I. -I/usr/include -I/usr/include/ruby/backward -I/usr/include -I. -DHAVE_UNISTD_H -DHAVE_SYS_SELECT_H -DEV_USE_SELECT -DHAVE_SYS_EPOLL_H -DEV_USE_EPOLL -DHAVE_SYS_RESOURCE_H -DHAVE_SYS_RESOURCE_H    -fPIC -std=c99 -m64 -o bytebuffer.o -c bytebuffer.c
+gcc -I. -I/usr/include -I/usr/include/ruby/backward -I/usr/include -I. -DHAVE_UNISTD_H -DHAVE_SYS_SELECT_H -DEV_USE_SELECT -DHAVE_SYS_EPOLL_H -DEV_USE_EPOLL -DHAVE_SYS_RESOURCE_H -DHAVE_SYS_RESOURCE_H    -fPIC -std=c99 -m64 -o monitor.o -c monitor.c
+gcc -I. -I/usr/include -I/usr/include/ruby/backward -I/usr/include -I. -DHAVE_UNISTD_H -DHAVE_SYS_SELECT_H -DEV_USE_SELECT -DHAVE_SYS_EPOLL_H -DEV_USE_EPOLL -DHAVE_SYS_RESOURCE_H -DHAVE_SYS_RESOURCE_H    -fPIC -std=c99 -m64 -o nio4r_ext.o -c nio4r_ext.c
+In file included from nio4r_ext.c:7:
+../libev/ev.c:1836:31: warning: ‘ev_default_loop_ptr’ initialized and declared ‘extern’
+   EV_API_DECL struct ev_loop *ev_default_loop_ptr = 0; /* needs to be initialised to make it a definition despite extern */
+                               ^~~~~~~~~~~~~~~~~~~
+In file included from nio4r_ext.c:7:
+../libev/ev.c: In function ‘ev_run’:
+../libev/ev.c:3750:36: warning: passing argument 1 of ‘rb_thread_call_without_gvl’ from incompatible pointer type [-Wincompatible-pointer-types]
+         rb_thread_call_without_gvl(ev_backend_poll, (void *)&poll_args, RUBY_UBF_IO, 0);
+                                    ^~~~~~~~~~~~~~~
+In file included from ../libev/ev.c:42,
+                 from nio4r_ext.c:7:
+/usr/include/ruby/thread.h:28:7: note: expected ‘void * (*)(void *)’ but argument is of type ‘VALUE (*)(void *)’ {aka ‘long unsigned int (*)(void *)’}
+ void *rb_thread_call_without_gvl(void *(*func)(void *), void *data1,
+       ^~~~~~~~~~~~~~~~~~~~~~~~~~
+nio4r_ext.c: In function ‘Init_nio4r_ext’:
+nio4r_ext.c:15:22: warning: passing argument 1 of ‘ev_set_allocator’ from incompatible pointer type [-Wincompatible-pointer-types]
+     ev_set_allocator(xrealloc);
+                      ^~~~~~~~
+In file included from nio4r_ext.c:7:
+../libev/ev.c:1738:27: note: expected ‘void * (*)(void *, long int)’ but argument is of type ‘void * (*)(void *, size_t)’ {aka ‘void * (*)(void *, long unsigned int)’}
+ ev_set_allocator (void *(*cb)(void *ptr, long size) EV_THROW) EV_THROW
+                   ~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~
+gcc -I. -I/usr/include -I/usr/include/ruby/backward -I/usr/include -I. -DHAVE_UNISTD_H -DHAVE_SYS_SELECT_H -DEV_USE_SELECT -DHAVE_SYS_EPOLL_H -DEV_USE_EPOLL -DHAVE_SYS_RESOURCE_H -DHAVE_SYS_RESOURCE_H    -fPIC -std=c99 -m64 -o selector.o -c selector.c
+rm -f nio4r_ext.so
+gcc -shared -o nio4r_ext.so bytebuffer.o monitor.o nio4r_ext.o selector.o -L. -L/usr/lib64 -L. -Wl,-z,relro  -Wl,-z,now -specs=/usr/lib/rpm/redhat/redhat-hardened-ld -fstack-protector -rdynamic -Wl,-export-dynamic -Wl,-z,relro  -Wl,-z,now -specs=/usr/lib/rpm/redhat/redhat-hardened-ld -m64  -m64  -lruby  -lpthread -ldl -lcrypt -lm   -lc
+
+current directory: /home/pink/projects/coding-challenge/vendor/bundle/ruby/2.5.0/gems/nio4r-2.3.1/ext/nio4r
+make "DESTDIR=" install
+/usr/bin/mkdir -p . ./.gem.20181211-31544-1h9chy
+exit > .sitearchdir.time
+/usr/bin/install -c -m 0755 nio4r_ext.so ./.gem.20181211-31544-1h9chy
