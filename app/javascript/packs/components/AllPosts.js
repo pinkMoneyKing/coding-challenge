@@ -22,6 +22,7 @@ export const AllPosts = ({
 	posts}) => {
 	return (
 		posts.map((post, index) => {
+			const comments = post.comments.length ? post.comments.length : 0;
 			return(
 				<div 
 					style={postStyle}
@@ -36,7 +37,7 @@ export const AllPosts = ({
 						{post.body}
 					</div>
 					<div>
-						comments({post.comments.length})
+						comments({comments})
 					</div>
 				</div>
 			)

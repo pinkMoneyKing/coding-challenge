@@ -18,7 +18,9 @@ export default class NewComment extends React.Component {
 	handleFormSubmit(){
 		const {
 			post_id,
+			post,
 			setViewingState,
+			setPost,
 			// addNewPost
 			} = this.props;
 		// setViewingState('LOADING');
@@ -28,13 +30,11 @@ export default class NewComment extends React.Component {
 			headers: {
 				'Content-Type': 'application/json'
 			},
-			post_id: post_id,
 			body: comment,
 		}).then((response) => {return response.json()})
 		.then((comment)=> {
-			// addNewPost(post);
-			//this should switch to specific post view
-			// setViewingState('ALL_POSTS');
+			setViewingState('POST');
+			setPost(post);
 		})
 	}
 	render(){

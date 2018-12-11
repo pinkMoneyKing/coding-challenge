@@ -20,9 +20,18 @@ export default class App extends React.Component{
 			post: {},
 		}
 		// We bind this here so we can using it in other components
+		this.deletePost = this.deletePost.bind(this);
 		this.setViewingState = this.setViewingState.bind(this);
 		this.addNewPost = this.addNewPost.bind(this);
 		this.setPost = this.setPost.bind(this);
+	}
+	deletePost(id){
+		fetch(`http://localhost:3000/api/v1/posts/${id}`, {
+			method: 'DELETE',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+		}).then((response) => {return response})
 	}
 	setPost(post){
 		this.setState({post: post});
@@ -33,6 +42,7 @@ export default class App extends React.Component{
 		})
 	}
 	setViewingState(view){
+		console.log('view', view);
 		this.setState({view: view});
 	}
 	renderView(view){
@@ -46,10 +56,13 @@ export default class App extends React.Component{
 					posts={this.state.posts} />
 				case 'POST':
 				return <Post 
+					deletePost={this.deletePost}
+					setPost={this.setPost}
 					setViewingState={this.setViewingState}
 					post={this.state.post}/>
 				case 'NEW_POST':
 				return <NewPost 
+					setPost={this.setPost}
 					setViewingState={this.setViewingState}
 					addNewPost={this.addNewPost}
 					/>;

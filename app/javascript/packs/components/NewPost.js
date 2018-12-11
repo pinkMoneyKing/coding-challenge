@@ -22,9 +22,9 @@ export default class NewPost extends React.Component {
 	handleFormSubmit(title, body){
 		const {
 			setViewingState,
-			addNewPost
+			addNewPost,
+			setPost,
 			} = this.props;
-		setViewingState('LOADING');
 		const post = JSON.stringify({post: {title: this.state.title, body: this.state.body} });
 		fetch('http://localhost:3000/api/v1/posts', {
 			method: 'POST',
@@ -35,8 +35,10 @@ export default class NewPost extends React.Component {
 		}).then((response) => {return response.json()})
 		.then((post)=> {
 			addNewPost(post);
-			//this should switch to specific post view
-			setViewingState('ALL_POSTS');
+			// this should switch to specific post view
+			// this doesn't work
+			setViewingState('POST');
+			setPost(post);
 		})
 	}
 	render(){
