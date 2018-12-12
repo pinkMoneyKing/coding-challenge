@@ -1,5 +1,6 @@
 import React				from 'react';
 import NewComment   from './NewComment';
+import Comment			from './Comment';
 
 export default class Post extends React.Component {
 	constructor(props){
@@ -7,30 +8,15 @@ export default class Post extends React.Component {
 		this.state = {
 			};
 		this.displayComments = this.displayComments.bind(this);
-		this.deleteComment = this.deleteComment.bind(this);
-		}
-	deleteComment(id){
-		fetch(`http://localhost:3000/api/v1/comments/${id}`, {
-			method: 'DELETE',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-		}).then((response) => {return response})
 	}
 	displayComments(){
 		const {post} = this.props;
 		if(post.comments){
 			return post.comments.map(c => {
 				return (
-					<div
-						onClick={() => {
-							this.deleteComment(c.id);
-							}}>
-								x
-						<div>
-							{c.body}
-						</div>
-					</div>
+						<Comment
+							post_id={post.id}
+							comment={c} />
 					)
 				})
 		} else {

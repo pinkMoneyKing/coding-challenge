@@ -13,7 +13,7 @@ class Api::V1::PostsController < ApplicationController
 
   def destroy
     # Remove a `Post` from the database
-		# can't seem to get this to work
+		# Remember to destory dependence in the model otherwise this fails
 		puts "params id", params[:id].is_a?(String)
 		post = Post.find(params[:id].to_i)
 		post.destroy
