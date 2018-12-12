@@ -14,9 +14,9 @@ class Api::V1::PostsController < ApplicationController
   def destroy
     # Remove a `Post` from the database
 		# can't seem to get this to work
-		@id = params[:id]
-		@post = Post.find(@id)
-		@post.destroy
+		puts "params id", params[:id].is_a?(String)
+		post = Post.find(params[:id].to_i)
+		post.destroy
   end
 
 	private
