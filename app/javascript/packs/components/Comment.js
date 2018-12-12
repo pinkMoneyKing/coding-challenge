@@ -55,7 +55,7 @@ export default class Comment extends React.Component {
 				<div>
 					<div
 						onClick={() => {
-							this.deleteComment(c.id);
+							this.deleteComment(comment.id);
 					}}>
 						(delete c)
 					</div>
